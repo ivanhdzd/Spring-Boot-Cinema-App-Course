@@ -16,16 +16,16 @@ class DetailsController {
 	private IMoviesService serviceMovies;
 
 	/**
-	 * Get movie details.
-	 * Includes a decorator that indicates this method is a route that response to GET method.
-	 * @param model object to pass data to JSP template.
-	 * @param id movie to get it data.
+	 * Get movie details. Includes a decorator that indicates this method is a route
+	 * that response to GET method.
+	 *
+	 * @param model      object to pass data to JSP template.
+	 * @param id         movie to get it data.
 	 * @param searchDate to filter movie data.
 	 * @return JSP template name to render.
 	 */
 	@GetMapping(value = "/details/{id}")
-	public String getDetails(Model model, @PathVariable("id") int id,
-			@RequestParam("searchDate") String searchDate) {
+	public String getDetails(Model model, @PathVariable("id") int id, @RequestParam("searchDate") String searchDate) {
 		model.addAttribute("movie", serviceMovies.searchById(id));
 		return "details";
 	}

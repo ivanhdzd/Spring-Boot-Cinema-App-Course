@@ -8,13 +8,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class Util {
 	/**
 	 * Make a dates list.
+	 *
 	 * @param count number of days to get from now.
 	 * @return Dates list from now to count days next.
 	 */
@@ -40,25 +39,25 @@ public class Util {
 
 	/**
 	 * Save an image into server.
+	 *
 	 * @param multipart file get from form.
-	 * @param request   Http servlet request instance.
 	 * @return image name.
 	 */
-	public static String saveImage(MultipartFile multipart, HttpServletRequest request) {
+	public static String saveFile(MultipartFile multipart, String path) {
 		String name = randomAlphaNumeric(8) + multipart.getOriginalFilename().replace(" ", "-");
-		String path = request.getServletContext().getRealPath("/resources/static/img/");
 		try {
 			File imageFile = new File(path + name);
 			multipart.transferTo(imageFile);
 			return name;
 		} catch (Exception e) {
-			System.out.println("[ERROR] Util.saveImage:" + e.getMessage());
+			System.out.println("[ERROR] Util.saveFile:" + e.getMessage());
 			return null;
 		}
 	}
 
 	/**
 	 * Generate a random alpha numeric string.
+	 *
 	 * @param count number of characters to generate.
 	 * @return random string generated.
 	 */

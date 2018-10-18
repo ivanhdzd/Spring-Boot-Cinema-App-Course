@@ -36,12 +36,12 @@
 					<c:choose>
 						<c:when test="${ status.index == 0 }">
 							<div class="carousel-item active">
-								<img class="d-block w-100" src="${ assets }img/${ banner.file }" title="${ banner.title }" alt="${ banner.title }">
+								<img class="d-block w-100" src="${ assets }img/banners/${ banner.file }" title="${ banner.title }" alt="${ banner.title }">
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="carousel-item">
-								<img class="d-block w-100" src="${ assets }img/${ banner.file }" title="${ banner.title }" alt="${ banner.title }">
+								<img class="d-block w-100" src="${ assets }img/banners/${ banner.file }" title="${ banner.title }" alt="${ banner.title }">
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -80,7 +80,7 @@
 		<article class="row">
 			<c:forEach items="${ movies }" var="movie">
 				<div class="col-12 col-md-6 col-lg-4 col-xl-3">
-					<img src="${ assets }img/${ movie.image }" alt="${ movie.image }" title="${ movie.title }" class="d-block w-100 rounded">
+					<img src="${ assets }img/movies/${ movie.image }" alt="${ movie.image }" title="${ movie.title }" class="d-block w-100 rounded">
 					<h2 class="text-center">${ movie.title }</h2>
 					<h5 class="text-center">
 						Premiere: <fmt:formatDate value="${ movie.premiereDate }" pattern="dd-MM-yyyy" />

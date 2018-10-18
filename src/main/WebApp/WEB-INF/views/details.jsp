@@ -34,7 +34,7 @@
 				<hr>
 				<article class="row">
 					<div class="col-12 col-md-3 text-center">
-						<img src="${ assets }img/${ movie.image }" alt="${ movie.image }" class="d-block w-100 rounded">
+						<img src="${ assets }img/movies/${ movie.image }" alt="${ movie.image }" class="d-block w-100 rounded">
 					</div>
 					<div class="col-12 col-md-9">
 						<div class="card">

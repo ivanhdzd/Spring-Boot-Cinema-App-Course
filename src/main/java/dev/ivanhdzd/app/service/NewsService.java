@@ -8,6 +8,7 @@ import dev.ivanhdzd.app.model.News;
 public class NewsService implements INewsService {
 	/**
 	 * Save news item.
+	 *
 	 * @param news data.
 	 */
 	@Override

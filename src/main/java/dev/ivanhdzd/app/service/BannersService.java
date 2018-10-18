@@ -51,6 +51,7 @@ public class BannersService implements IBannersService {
 
 	/**
 	 * Return all banners list.
+	 *
 	 * @return banners list.
 	 */
 	@Override
@@ -62,6 +63,7 @@ public class BannersService implements IBannersService {
 
 	/**
 	 * Save new banner registry.
+	 *
 	 * @param banner data object.
 	 */
 	@Override

@@ -109,6 +109,7 @@ public class MoviesService implements IMoviesService {
 
 	/**
 	 * Return all movies list.
+	 *
 	 * @return movies list.
 	 */
 	@Override
@@ -118,6 +119,7 @@ public class MoviesService implements IMoviesService {
 
 	/**
 	 * Search a movie by it ID.
+	 *
 	 * @param id movie ID.
 	 * @return movie.
 	 */
@@ -128,6 +130,7 @@ public class MoviesService implements IMoviesService {
 
 	/**
 	 * Save new movie registry.
+	 *
 	 * @param movie data object.
 	 */
 	@Override
@@ -138,6 +141,7 @@ public class MoviesService implements IMoviesService {
 
 	/**
 	 * Get all movie genres.
+	 *
 	 * @return genres list.
 	 */
 	@Override

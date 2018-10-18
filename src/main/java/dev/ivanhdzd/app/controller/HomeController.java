@@ -14,7 +14,6 @@ import dev.ivanhdzd.app.service.IMoviesService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 class HomeController {
 	/** Banners service reference */
@@ -29,8 +28,9 @@ class HomeController {
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	/**
-	 * Get home page.
-	 * Includes a decorator that indicates this method is a route that response to GET method.
+	 * Get home page. Includes a decorator that indicates this method is a route
+	 * that response to GET method.
+	 *
 	 * @param model object to pass data to JSP template.
 	 * @return JSP template name to render.
 	 */
@@ -44,8 +44,9 @@ class HomeController {
 	}
 
 	/**
-	 * Post search form data.
-	 * Includes a decorator that indicates this method is a route that response to GET method.
+	 * Post search form data. Includes a decorator that indicates this method is a
+	 * route that response to GET method.
+	 *
 	 * @param model object to pass data to JSP template.
 	 * @return JSP template name to render.
 	 */
