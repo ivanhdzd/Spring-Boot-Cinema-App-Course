@@ -2,18 +2,41 @@ package dev.ivanhdzd.app.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import dev.ivanhdzd.app.Enumerator.Status;
 
+@Entity
+@Table(name = "news")
 public class News {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", length = 8, nullable = false)
 	private int id;
+
+	@Column(name = "title", length = 64, nullable = false)
 	private String title;
+
+	@Column(name = "publication_date", nullable = false)
 	private Date publicationDate;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status", length = 8, nullable = false)
 	private Status status;
+
+	@Column(name = "details", nullable = false)
 	private String details;
 
 	public News() {
-		this.publicationDate = new Date();
-		this.status = Status.ACTIVE;
+		publicationDate = new Date();
+		status = Status.ACTIVE;
 	}
 
 	public int getId() {
