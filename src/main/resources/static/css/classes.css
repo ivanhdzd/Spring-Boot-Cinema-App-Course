@@ -1,0 +1,43 @@
+.drag-drop {
+	background-color: white;
+	border-color: black;
+	border-radius: 1rem;
+	border-style: dashed;
+	border-width: 0.5rem;
+	cursor: pointer;
+	text-align: center;
+	transition: 0.5s all;
+}
+
+.drag-drop-hover {
+	border-color: #888;
+	transition: 0.5s all;
+}
+
+.height-1-over-2 {
+	max-height: calc(100vh / 1 * 2);
+}
+
+.height-2-over-3 {
+	max-height: calc(100vh / 3 * 2);
+}
+
+.height-3-over-4 {
+	max-height: calc(100vh / 4 * 3);
+}
+
+.height-4-over-5 {
+	max-height: calc(100vh / 5 * 4);
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.scroll-container {
+	overflow: auto;
+}
+
+.text-bold {
+	font-weight: bold;
+}

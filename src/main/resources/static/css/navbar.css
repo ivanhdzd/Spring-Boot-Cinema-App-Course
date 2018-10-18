@@ -1,0 +1,17 @@
+.cover {
+	background-color: rgba(0, 0, 0, 0);
+	height: 100%;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	transition: 0.5s all;
+	width: 100%;
+	z-index: -1;
+}
+
+.cover-dark {
+	background-color: rgba(0, 0, 0, 0.375);
+	position: fixed;
+	transition: 0.5s all;
+	z-index: 99;
+}
