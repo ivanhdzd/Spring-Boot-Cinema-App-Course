@@ -2,13 +2,14 @@ package dev.ivanhdzd.app.model;
 
 import java.util.Date;
 
+import dev.ivanhdzd.app.Enumerator.Classification;
 import dev.ivanhdzd.app.Enumerator.Status;
 
 public class Movie {
 	private int id;
 	private String title;
 	private int duration;
-	private String classification;
+	private Classification classification;
 	private String genre;
 	private Date premiereDate;
 	private String image = "cinema.png";
@@ -39,11 +40,11 @@ public class Movie {
 		this.duration = duration;
 	}
 
-	public String getClassification() {
+	public Classification getClassification() {
 		return classification;
 	}
 
-	public void setClassification(String classification) {
+	public void setClassification(Classification classification) {
 		this.classification = classification;
 	}
 
