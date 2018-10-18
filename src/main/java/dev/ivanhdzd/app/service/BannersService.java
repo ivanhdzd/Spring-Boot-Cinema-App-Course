@@ -23,22 +23,22 @@ public class BannersService implements IBannersService {
 			Banner banner1 = new Banner();
 			banner1.setId(1);
 			banner1.setTitle("Kong skull island");
-			banner1.setFile("slide1.jpg");
+			banner1.setImage("slide1.jpg");
 
 			Banner banner2 = new Banner();
 			banner2.setId(2);
 			banner2.setTitle("Beauty and the beast");
-			banner2.setFile("slide2.jpg");
+			banner2.setImage("slide2.jpg");
 
 			Banner banner3 = new Banner();
 			banner3.setId(3);
 			banner3.setTitle("Fast and furious 8");
-			banner3.setFile("slide3.jpg");
+			banner3.setImage("slide3.jpg");
 
 			Banner banner4 = new Banner();
 			banner4.setId(4);
 			banner4.setTitle("The boss baby");
-			banner4.setFile("slide4.jpg");
+			banner4.setImage("slide4.jpg");
 
 			banners.add(banner1);
 			banners.add(banner2);

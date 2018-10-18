@@ -8,7 +8,7 @@ public class Banner {
 	private int id;
 	private String title;
 	private Date date;
-	private String file;
+	private String image;
 	private Status status;
 
 	public Banner() {
@@ -40,12 +40,12 @@ public class Banner {
 	// this.date = date;
 	// }
 
-	public String getFile() {
-		return file;
+	public String getImage() {
+		return image;
 	}
 
-	public void setFile(String file) {
-		this.file = file;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public Status getStatus() {
@@ -58,7 +58,7 @@ public class Banner {
 
 	@Override
 	public String toString() {
-		return "Banner { id: " + id + ", title: " + title + ", date: " + date + ", file: " + file + ", status: "
+		return "Banner { id: " + id + ", title: " + title + ", date: " + date + ", image: " + image + ", status: "
 				+ status + " }";
 	}
 }

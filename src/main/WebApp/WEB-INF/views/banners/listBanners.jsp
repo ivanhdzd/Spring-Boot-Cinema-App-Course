@@ -4,11 +4,11 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <spring:url value="/" var="assets" />
 <spring:url value="../" var="urlRoot" />
-<spring:url value="/movies" var="urlMovies" />
+<spring:url value="/banners" var="urlBanners" />
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Movies list</title>
+	<title>Banners list</title>
 	<meta charset="ISO-8859-1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +19,12 @@
 <body>
 	<jsp:include page="${ urlRoot }includes/navbar.jsp" />
 	<section id="container" class="container">
-		<h1>Movies list</h1>
+		<h1>Banners list</h1>
 		<c:if test="${ message != null }">
 			<div class="alert alert-success" role="alert">${ message }</div>
 		</c:if>
 		<article class="my-2 my-md-4">
-			<a class="btn btn-success btn-lg" href="${ urlMovies }/create">New movie</a>
+			<a class="btn btn-success btn-lg" href="${ urlBanners }/create">New banner</a>
 		</article>
 		<article class="card card-body" style="padding: 0">
 			<div class="table-responsive height-3-over-4">
@@ -32,25 +32,17 @@
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">Title</th>
-							<th scope="col">Genre</th>
-							<th scope="col">Classification</th>
-							<th scope="col">Duration</th>
-							<th scope="col">Premiere date</th>
 							<th scope="col">Status</th>
 							<th scope="col">Options</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${ movies }" var="movie">
+						<c:forEach items="${ banners }" var="banner">
 							<tr>
-								<td>${ movie.title }</td>
-								<td>${ movie.genre }</td>
-								<td>${ movie.classification }</td>
-								<td>${ movie.duration } min.</td>
-								<td><fmt:formatDate value="${ movie.premiereDate }" pattern="dd-MM-yyyy"/></td>
+								<td>${ banner.title }</td>
 								<td>
 									<c:choose>
-										<c:when test="${ movie.status == 'ACTIVE' }">
+										<c:when test="${ banner.status == 'ACTIVE' }">
 											<label class="label label-success">Active</label>
 										</c:when>
 										<c:otherwise>
@@ -59,8 +51,8 @@
 									</c:choose>
 								</td>
 								<td>
-									<a class="btn btn-success" href="${ urlMovies }">Edit</a>
-									<a class="btn btn-danger" href="${ urlMovies }">Delete</a>
+									<a class="btn btn-success" href="${ urlBanners }">Edit</a>
+									<a class="btn btn-danger" href="${ urlBanners }">Delete</a>
 								</td>
 							</tr>
 						</c:forEach>

@@ -36,12 +36,12 @@
 					<c:choose>
 						<c:when test="${ status.index == 0 }">
 							<div class="carousel-item active">
-								<img class="d-block w-100" src="${ assets }img/banners/${ banner.file }" title="${ banner.title }" alt="${ banner.title }">
+								<img class="d-block w-100" src="${ assets }img/banners/${ banner.image }" title="${ banner.title }" alt="${ banner.title }">
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="carousel-item">
-								<img class="d-block w-100" src="${ assets }img/banners/${ banner.file }" title="${ banner.title }" alt="${ banner.title }">
+								<img class="d-block w-100" src="${ assets }img/banners/${ banner.image }" title="${ banner.title }" alt="${ banner.title }">
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -103,7 +103,6 @@
 							Check schedules
 						</a>
 					</div>
-
 				</div>
 			</c:forEach>
 		</article>
