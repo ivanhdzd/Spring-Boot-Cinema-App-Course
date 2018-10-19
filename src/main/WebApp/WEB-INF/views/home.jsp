@@ -106,6 +106,12 @@
 				</div>
 			</c:forEach>
 		</article>
+		<h1 class="text-center">Movies</h1>
+		<article class="row mb-3">
+			<c:forEach items="${ newsList }" var="news" varStatus="status">
+				<p>${ news }</p>
+			</c:forEach>
+		</article>
 	</section>
 	<jsp:include page="${ urlRoot }includes/footer.jsp" />
 	<script type="text/javascript" src="${ assets }lib/jquery/js/jquery-slim.min.js"></script>

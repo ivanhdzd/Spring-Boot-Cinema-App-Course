@@ -5,14 +5,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dev.ivanhdzd.app.Enumerator.Classification;
-import dev.ivanhdzd.app.Enumerator.Status;
+import dev.ivanhdzd.app.enumerator.Classification;
+import dev.ivanhdzd.app.enumerator.Status;
 import dev.ivanhdzd.app.model.Movie;
+import dev.ivanhdzd.app.repository.IMoviesRepository;
 
 @Service
 public class MoviesService implements IMoviesService {
+	@Autowired
+	private IMoviesRepository moviesRepository;
+
 	/** Movies list */
 	private List<Movie> movies = new LinkedList<Movie>();
 
@@ -30,7 +35,7 @@ public class MoviesService implements IMoviesService {
 	 */
 	@Override
 	public List<Movie> getAllMovies() {
-		return movies;
+		return moviesRepository.findAll();
 	}
 
 	/**
@@ -65,12 +70,13 @@ public class MoviesService implements IMoviesService {
 		List<String> genres = new LinkedList<String>();
 		genres.add("Action");
 		genres.add("Adventure");
+		genres.add("Childish");
 		genres.add("Classic");
 		genres.add("Comedy");
 		genres.add("Drama");
-		genres.add("Terror");
-		genres.add("Childish");
 		genres.add("Romantic");
+		genres.add("Terror");
+		genres.add("Thriller");
 		return genres;
 	}
 

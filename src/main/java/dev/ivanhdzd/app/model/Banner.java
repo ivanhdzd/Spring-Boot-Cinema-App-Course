@@ -2,13 +2,38 @@ package dev.ivanhdzd.app.model;
 
 import java.util.Date;
 
-import dev.ivanhdzd.app.Enumerator.Status;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import dev.ivanhdzd.app.enumerator.Status;
+import dev.ivanhdzd.app.enumerator.StatusConverter;
+
+@Entity
+@Table(name = "banners")
 public class Banner {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", length = 8, nullable = false)
 	private int id;
+
+	@Column(name = "title", length = 64, nullable = false)
 	private String title;
+
+	@Column(name = "date", nullable = false)
 	private Date date;
+
+	@Column(name = "image", length = 128, nullable = false)
 	private String image;
+
+	@Enumerated(EnumType.STRING)
+	@Convert(converter = StatusConverter.class)
 	private Status status;
 
 	public Banner() {

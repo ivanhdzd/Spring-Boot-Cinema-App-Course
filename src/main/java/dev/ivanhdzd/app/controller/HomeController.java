@@ -9,23 +9,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import dev.ivanhdzd.app.Util;
+import dev.ivanhdzd.app.enumerator.Status;
 import dev.ivanhdzd.app.service.IBannersService;
 import dev.ivanhdzd.app.service.IMoviesService;
+import dev.ivanhdzd.app.service.INewsService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 class HomeController {
-	/** Banners service reference */
+	/** Banners service instance reference */
 	@Autowired
 	private IBannersService serviceBanners;
 
-	/** Movies service reference */
+	/** Movies service instance reference */
 	@Autowired
 	private IMoviesService serviceMovies;
 
-	/** Date format object */
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	/** News service instance reference */
+	@Autowired
+	private INewsService serviceNews;
 
 	/**
 	 * Get home page. Includes a decorator that indicates this method is a route
@@ -34,12 +38,14 @@ class HomeController {
 	 * @param model object to pass data to JSP template.
 	 * @return JSP template name to render.
 	 */
-	@GetMapping(value = "/")
+	@GetMapping(value = "")
 	public String getHome(Model model) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		model.addAttribute("banners", serviceBanners.getAll());
 		model.addAttribute("movies", serviceMovies.getAllMovies());
 		model.addAttribute("searchDate", dateFormat.format(new Date()));
 		model.addAttribute("nextDays", Util.getNextDays(4));
+		model.addAttribute("newsList", serviceNews.getNewsByStatus(Status.ACTIVE));
 		return "home";
 	}
 
@@ -56,6 +62,7 @@ class HomeController {
 		model.addAttribute("movies", serviceMovies.getAllMovies());
 		model.addAttribute("searchDate", searchDate);
 		model.addAttribute("nextDays", Util.getNextDays(4));
+		model.addAttribute("newsList", serviceNews.getNewsByStatus(Status.ACTIVE));
 		return "home";
 	}
 }

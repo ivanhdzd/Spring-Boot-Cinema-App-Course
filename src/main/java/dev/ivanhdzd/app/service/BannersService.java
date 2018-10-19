@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import dev.ivanhdzd.app.Enumerator.Status;
+import dev.ivanhdzd.app.enumerator.Status;
 import dev.ivanhdzd.app.model.Banner;
 
 @Service

@@ -1,7 +1,15 @@
 package dev.ivanhdzd.app.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import dev.ivanhdzd.app.enumerator.Status;
 import dev.ivanhdzd.app.model.News;
 
-public interface INewsRepository extends CrudRepository<News, Integer> {}
+@Repository
+public interface INewsRepository extends JpaRepository<News, Integer> {
+	/** SELECT * FROM news WHERE status = ? ORDER BY publication_date DESC */
+	List<News> findByStatusOrderByPublicationDateDesc(Status status);
+}

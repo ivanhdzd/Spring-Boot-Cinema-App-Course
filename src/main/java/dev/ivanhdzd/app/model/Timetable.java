@@ -2,12 +2,37 @@ package dev.ivanhdzd.app.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "timetables")
 public class Timetable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", length = 8, nullable = false)
 	private int id;
+
+	@Column(name = "date", nullable = false)
 	private Date date;
+
+	@Column(name = "time", nullable = false)
 	private String time; // HH:mm
+
+	@Column(name = "room", length = 64, nullable = false)
 	private String room;
+
+	@Column(name = "price", nullable = false)
 	private double price;
+
+	@ManyToOne
+	@JoinColumn(name = "id_movie")
 	private Movie movie;
 
 	public int getId() {

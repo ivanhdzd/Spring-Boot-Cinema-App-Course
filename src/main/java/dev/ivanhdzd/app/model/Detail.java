@@ -1,10 +1,30 @@
 package dev.ivanhdzd.app.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "details")
 public class Detail {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", length = 8, nullable = false)
 	private int id;
+
+	@Column(name = "director", length = 64)
 	private String director;
+
+	@Column(name = "actors", length = 256)
 	private String actors;
+
+	@Column(name = "trailer", length = 256)
 	private String trailer;
+
+	@Column(name = "synopsis")
 	private String synopsis;
 
 	public int getId() {
