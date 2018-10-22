@@ -41,7 +41,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${ movies }" var="movie">
+						<c:forEach items="${ movies.content }" var="movie">
 							<tr>
 								<td>${ movie.title }</td>
 								<td>${ movie.genre }</td>
@@ -59,8 +59,8 @@
 									</c:choose>
 								</td>
 								<td>
-									<a class="btn btn-success" href="${ urlMovies }">Edit</a>
-									<a class="btn btn-danger" href="${ urlMovies }">Delete</a>
+									<a class="btn btn-success" href="${ urlMovies }/edit/${ movie.id }">Edit</a>
+									<a class="btn btn-danger" href="${ urlMovies }/delete/${ movie.id }" onclick="return confirm('Do you sure to want to delete this movie?')">Delete</a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -68,6 +68,46 @@
 				</table>
 			</div>
 		</article>
+		<nav aria-label="movies pagination" class="my-3 my-md-5">
+			<ul class="pagination justify-content-center">
+				<c:choose>
+					<c:when test="${ movies.number - 1 >= 0 }">
+						<li id="pagination-btn-previous" class="page-item">
+							<a href="${ urlMovies }?page=${ movies.number - 1 }" class="page-link" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+								<span class="sr-only">Previous</span>
+							</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li id="pagination-btn-previous" class="page-item disabled">
+							<a href="#" class="page-link" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+								<span class="sr-only">Previous</span>
+							</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${ movies.number + 1 < movies.totalPages }">
+						<li id="pagination-btn-next" class="page-item">
+							<a href="${ urlMovies }?page=${ movies.number + 1 }" class="page-link" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								<span class="sr-only">Next</span>
+							</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li id="pagination-btn-next" class="page-item disabled">
+							<a href="#" class="page-link" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								<span class="sr-only">Next</span>
+							</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</nav>
 	</section>
 	<jsp:include page="${ urlRoot }includes/footer.jsp" />
 	<script type="text/javascript" src="${ assets }lib/jquery/js/jquery.min.js"></script>

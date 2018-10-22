@@ -31,6 +31,7 @@
 		</spring:hasBindErrors>
 		<form:form action="${ urlMovies }/save" method="post" enctype="multipart/form-data" modelAttribute="movie" class="card bg-light">
 			<form:hidden path="id"/>
+			<form:hidden path="detail.id"/>
 			<article class="card-header">
 				<h1 class="card-title text-center">New movie</h1>
 			</article>

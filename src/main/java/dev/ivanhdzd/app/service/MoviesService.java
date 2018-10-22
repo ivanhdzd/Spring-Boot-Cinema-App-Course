@@ -1,31 +1,31 @@
 package dev.ivanhdzd.app.service;
 
-import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import dev.ivanhdzd.app.enumerator.Classification;
-import dev.ivanhdzd.app.enumerator.Status;
 import dev.ivanhdzd.app.model.Movie;
 import dev.ivanhdzd.app.repository.IMoviesRepository;
 
 @Service
 public class MoviesService implements IMoviesService {
+	/** Movies repository instance reference */
 	@Autowired
 	private IMoviesRepository moviesRepository;
 
-	/** Movies list */
-	private List<Movie> movies = new LinkedList<Movie>();
-
 	/**
-	 * Adds some movies to movies list.
+	 * Get movies count.
+	 *
+	 * @return movies count.
 	 */
-	public MoviesService() {
-		movies = populateMoviesList();
+	@Override
+	public long countMovies() {
+		return moviesRepository.count();
 	}
 
 	/**
@@ -39,6 +39,17 @@ public class MoviesService implements IMoviesService {
 	}
 
 	/**
+	 * Get all movies implementing pagination.
+	 *
+	 * @param page Spring object.
+	 * @return movies list page.
+	 */
+	@Override
+	public Page<Movie> getAllMovies(Pageable page) {
+		return moviesRepository.findAll(page);
+	}
+
+	/**
 	 * Search a movie by it ID.
 	 *
 	 * @param id movie ID.
@@ -46,18 +57,19 @@ public class MoviesService implements IMoviesService {
 	 */
 	@Override
 	public Movie searchById(int id) {
-		return movies.stream().filter(movie -> Objects.equals(movie.getId(), id)).findFirst().orElse(null);
+		Optional<Movie> optional = moviesRepository.findById(id);
+		if (optional.isPresent()) return optional.get();
+		else return null;
 	}
 
 	/**
-	 * Save new movie registry.
+	 * Insert new movie registry.
 	 *
 	 * @param movie data object.
 	 */
 	@Override
-	public void save(Movie movie) {
-		System.out.println("Saving movie: " + movie);
-		movies.add(movie);
+	public void insert(Movie movie) {
+		moviesRepository.save(movie);
 	}
 
 	/**
@@ -81,99 +93,12 @@ public class MoviesService implements IMoviesService {
 	}
 
 	/**
-	 * Make a mock movies list.
-	 * @return Movies list.
+	 * Delete a movie by it ID.
+	 *
+	 * @param id movie to delete.
 	 */
-	private List<Movie> populateMoviesList() {
-		List<Movie> movies = new LinkedList<Movie>();
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		try {
-			Movie movie1 = new Movie();
-			movie1.setId(1);
-			movie1.setTitle("Power Rangers");
-			movie1.setDuration(120);
-			movie1.setClassification(Classification.B);
-			movie1.setGenre("Adventure");
-			movie1.setPremiereDate(formatter.parse("02-05-2017"));
-
-			Movie movie2 = new Movie();
-			movie2.setId(2);
-			movie2.setTitle("La bella y la bestia");
-			movie2.setDuration(132);
-			movie2.setClassification(Classification.A);
-			movie2.setGenre("Childish");
-			movie2.setPremiereDate(formatter.parse("20-05-2017"));
-			movie2.setImage("bella.png");
-
-			Movie movie3 = new Movie();
-			movie3.setId(3);
-			movie3.setTitle("Contratiempo");
-			movie3.setDuration(106);
-			movie3.setClassification(Classification.B);
-			movie3.setGenre("Thriller");
-			movie3.setPremiereDate(formatter.parse("28-05-2017"));
-			movie3.setImage("contratiempo.png");
-
-			Movie movie4 = new Movie();
-			movie4.setId(4);
-			movie4.setTitle("Kong La Isla Calavera");
-			movie4.setDuration(118);
-			movie4.setClassification(Classification.B);
-			movie4.setGenre("Action");
-			movie4.setPremiereDate(formatter.parse("06-06-2017"));
-			movie4.setImage("kong.png");
-			movie4.setStatus(Status.INACTIVE);
-
-			Movie movie5 = new Movie();
-			movie5.setId(5);
-			movie5.setTitle("Life: Vida Inteligente");
-			movie5.setDuration(104);
-			movie5.setClassification(Classification.B);
-			movie5.setGenre("Drama");
-			movie5.setPremiereDate(formatter.parse("10-06-2017"));
-			movie5.setImage("estreno5.png");
-
-			Movie movie6 = new Movie();
-			movie6.setId(6);
-			movie6.setTitle("Revolver");
-			movie6.setDuration(115);
-			movie6.setClassification(Classification.C);
-			movie6.setGenre("Suspense");
-			movie6.setPremiereDate(formatter.parse("17-10-2005"));
-			movie6.setImage("revolver.jpg");
-
-			Movie movie7 = new Movie();
-			movie7.setId(7);
-			movie7.setTitle("RocknRolla");
-			movie7.setDuration(114);
-			movie7.setClassification(Classification.C);
-			movie7.setGenre("Suspense");
-			movie7.setPremiereDate(formatter.parse("27-01-2009"));
-			movie7.setImage("rocknrolla.jpg");
-
-			Movie movie8 = new Movie();
-			movie8.setId(8);
-			movie8.setTitle("Snatch");
-			movie8.setDuration(104);
-			movie8.setClassification(Classification.C);
-			movie8.setGenre("Suspense");
-			movie8.setPremiereDate(formatter.parse("21-03-2001"));
-			movie8.setImage("snatch.jpg");
-			movie8.setStatus(Status.INACTIVE);
-
-			movies.add(movie1);
-			movies.add(movie2);
-			movies.add(movie3);
-			movies.add(movie4);
-			movies.add(movie5);
-			movies.add(movie6);
-			movies.add(movie7);
-			movies.add(movie8);
-
-			return movies;
-		} catch (Exception e) {
-			System.out.println("[ERROR] MoviesService.MoviesService(): " + e.getMessage());
-			return null;
-		}
+	@Override
+	public void delete(int id) {
+		moviesRepository.deleteById(id);
 	}
 }
