@@ -10,17 +10,6 @@
             "mainClass": "dev.ivanhdzd.app.Application",
             "args": "",
             "projectName": "cinema-app"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - MainApplication",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "stopOnEntry": false,
-            "mainClass": "dev.ivanhdzd.app.MainApplication",
-            "args": "",
-            "projectName": "cinema-app"
         }
     ]
 }
