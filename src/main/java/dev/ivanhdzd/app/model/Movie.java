@@ -1,19 +1,16 @@
 package dev.ivanhdzd.app.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -58,9 +55,6 @@ public class Movie {
 	@OneToOne
 	@JoinColumn(name = "id_detail")
 	private Detail detail;
-
-	@OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
-	private List<Timetable> timetables;
 
 	public int getId() {
 		return id;
@@ -132,14 +126,6 @@ public class Movie {
 
 	public void setDetail(Detail detail) {
 		this.detail = detail;
-	}
-
-	public List<Timetable> getTimetables() {
-		return timetables;
-	}
-
-	public void setTimetables(List<Timetable> timetables) {
-		this.timetables = timetables;
 	}
 
 	@Override

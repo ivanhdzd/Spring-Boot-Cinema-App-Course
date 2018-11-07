@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "timetables")
@@ -19,6 +21,7 @@ public class Timetable {
 	@Column(name = "id", length = 8, nullable = false)
 	private int id;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date", nullable = false)
 	private Date date;
 

@@ -59,6 +59,32 @@
 					</div>
 				</article>
 				<hr>
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Timetables for ${ searchDate }</h3>
+					</div>
+					<div class="card-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Time</th>
+									<th scope="col">Room</th>
+									<th scope="col">Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${ timetables }" var="timetable">
+									<tr>
+										<td>${ timetable.time }</td>
+										<td>${ timetable.room }</td>
+										<td>$${ timetable.price }</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<hr>
 				<article class="row">
 					<div class="col-12 col-md-7">
 						<div class="card">
