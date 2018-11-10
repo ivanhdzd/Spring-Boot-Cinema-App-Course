@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import dev.ivanhdzd.app.enumerator.Status;
 import dev.ivanhdzd.app.enumerator.StatusConverter;
@@ -26,6 +28,7 @@ public class Banner {
 	@Column(name = "title", length = 64, nullable = false)
 	private String title;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date", nullable = false)
 	private Date date;
 

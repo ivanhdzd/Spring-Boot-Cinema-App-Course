@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import dev.ivanhdzd.app.enumerator.Classification;
 import dev.ivanhdzd.app.enumerator.ClassificationConverter;
@@ -41,6 +43,7 @@ public class Movie {
 	@Column(name = "genre", length = 64, nullable = false)
 	private String genre;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "premiere_date", nullable = false)
 	private Date premiereDate;
 
