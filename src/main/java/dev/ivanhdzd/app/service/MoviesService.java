@@ -1,8 +1,10 @@
 package dev.ivanhdzd.app.service;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,13 +12,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import dev.ivanhdzd.app.model.Movie;
+import dev.ivanhdzd.app.model.Timetable;
 import dev.ivanhdzd.app.repository.IMoviesRepository;
+import dev.ivanhdzd.app.repository.ITimetablesRepository;
 
 @Service
 public class MoviesService implements IMoviesService {
 	/** Movies repository instance reference */
 	@Autowired
 	private IMoviesRepository moviesRepository;
+
+	/** Timetables repository instance reference */
+	@Autowired
+	private ITimetablesRepository timetablesRepository;
 
 	/**
 	 * Get movies count.
@@ -47,6 +55,18 @@ public class MoviesService implements IMoviesService {
 	@Override
 	public Page<Movie> getAllMovies(Pageable page) {
 		return moviesRepository.findAll(page);
+	}
+
+	/**
+	 * Get all active movies find by timetables date.
+	 *
+	 * @param date timetable to filter.
+	 * @return movies list.
+	 */
+	@Override
+	public List<Movie> getActiveMoviesByDate(Date date) {
+		List<Timetable> timetables = timetablesRepository.findByDateWithActiveMovies(date);
+		return timetables.stream().map(timetable -> timetable.getMovie()).collect(Collectors.toList());
 	}
 
 	/**

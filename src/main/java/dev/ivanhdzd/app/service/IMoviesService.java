@@ -1,5 +1,6 @@
 package dev.ivanhdzd.app.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ public interface IMoviesService {
 	long countMovies();
 	List<Movie> getAllMovies();
 	Page<Movie> getAllMovies(Pageable page);
+	List<Movie> getActiveMoviesByDate(Date date);
 	Movie searchById(int id);
 	void insert(Movie movie);
 	List<String> getGenres();

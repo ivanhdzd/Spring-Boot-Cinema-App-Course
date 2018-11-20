@@ -41,11 +41,15 @@ class HomeController {
 	@GetMapping(value = "")
 	public String getHome(Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		model.addAttribute("banners", serviceBanners.getAll());
-		model.addAttribute("movies", serviceMovies.getAllMovies());
-		model.addAttribute("searchDate", dateFormat.format(new Date()));
-		model.addAttribute("nextDays", Util.getNextDays(4));
-		model.addAttribute("newsList", serviceNews.getTop3NewsByStatus(Status.ACTIVE));
+		try {
+			model.addAttribute("banners", serviceBanners.getAll());
+			model.addAttribute("searchDate", dateFormat.format(new Date()));
+			model.addAttribute("nextDays", Util.getNextDays(4));
+			model.addAttribute("movies", serviceMovies.getActiveMoviesByDate(new Date()));
+			model.addAttribute("newsList", serviceNews.getTop3NewsByStatus(Status.ACTIVE));
+		} catch (Exception ex) {
+			System.out.println("[ERROR]: HomeController.postSearch: " + ex.getMessage());
+		}
 		return "home";
 	}
 
@@ -57,12 +61,17 @@ class HomeController {
 	 * @return JSP template name to render.
 	 */
 	@PostMapping(value = "/search")
-	public String postSearch(Model model, @RequestParam("searchDate") String searchDate) {
-		model.addAttribute("banners", serviceBanners.getAll());
-		model.addAttribute("movies", serviceMovies.getAllMovies());
-		model.addAttribute("searchDate", searchDate);
-		model.addAttribute("nextDays", Util.getNextDays(4));
-		model.addAttribute("newsList", serviceNews.getTop3NewsByStatus(Status.ACTIVE));
+	public String postSearch(Model model, @RequestParam("searchDate") String date) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			model.addAttribute("banners", serviceBanners.getAll());
+			model.addAttribute("searchDate", date);
+			model.addAttribute("nextDays", Util.getNextDays(4));
+			model.addAttribute("movies", serviceMovies.getActiveMoviesByDate(dateFormat.parse(date)));
+			model.addAttribute("newsList", serviceNews.getTop3NewsByStatus(Status.ACTIVE));
+		} catch (Exception ex) {
+			System.out.println("[ERROR]: HomeController.postSearch: " + ex.getMessage());
+		}
 		return "home";
 	}
 }
