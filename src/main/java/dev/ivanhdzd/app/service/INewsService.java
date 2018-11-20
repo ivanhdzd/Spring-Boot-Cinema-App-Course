@@ -10,4 +10,5 @@ public interface INewsService {
 	List<News> getAllNews();
 	News getNewsById(int id);
 	List<News> getNewsByStatus(Status status);
+	List<News> getTop3NewsByStatus(Status status);
 }

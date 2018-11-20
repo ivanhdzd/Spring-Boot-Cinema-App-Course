@@ -12,4 +12,7 @@ import dev.ivanhdzd.app.model.News;
 public interface INewsRepository extends JpaRepository<News, Integer> {
 	/** SELECT * FROM news WHERE status = ? ORDER BY publication_date DESC */
 	List<News> findByStatusOrderByPublicationDateDesc(Status status);
+
+	/** SELECT * FROM news WHERE status = ? ORDER BY publication_date DESC LIMIT 3 */
+	List<News> findTop3ByStatusOrderByPublicationDateDesc(Status status);
 }

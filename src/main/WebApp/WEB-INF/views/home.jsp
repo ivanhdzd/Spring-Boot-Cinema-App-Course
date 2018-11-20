@@ -56,7 +56,7 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</article>
-		<h1 class="text-center">Movies</h1>
+		<h1 class="text-center mt-3">Movies</h1>
 		<article class="row mb-3">
 			<form action="${ urlRoot }search" method="post" class="form-inline">
 				<div class="form-group">
@@ -79,7 +79,7 @@
 		</article>
 		<article class="row">
 			<c:forEach items="${ movies }" var="movie">
-				<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<div class="col-12 col-md-6 col-lg-4 col-xl-3 p-3">
 					<img src="${ assets }img/movies/${ movie.image }" alt="${ movie.image }" title="${ movie.title }" class="d-block w-100 rounded">
 					<h2 class="text-center">${ movie.title }</h2>
 					<h5 class="text-center">
@@ -106,10 +106,20 @@
 				</div>
 			</c:forEach>
 		</article>
-		<h1 class="text-center">Movies</h1>
-		<article class="row mb-3">
+		<hr>
+		<h1 class="text-center mt-4">News</h1>
+		<article>
 			<c:forEach items="${ newsList }" var="news" varStatus="status">
-				<p>${ news }</p>
+				<div class="mb-3">
+					<hr>
+					<h2>${ news.title }</h2>
+					<p>
+						<label class="label label-danger">
+							Publicado: <fmt:formatDate pattern="dd-MM-yyyy" value="${ news.publicationDate }"></fmt:formatDate>
+						</label>
+					</p>
+					${ news.details }
+				</div>
 			</c:forEach>
 		</article>
 	</section>

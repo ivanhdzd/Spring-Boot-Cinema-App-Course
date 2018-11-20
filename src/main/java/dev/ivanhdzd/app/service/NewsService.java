@@ -24,12 +24,12 @@ public class NewsService implements INewsService {
 	 */
 	@Override
 	public void save(News news) {
-		System.out.println("Saving news: " + news);
 		newsRepository.save(news);
 	}
 
 	/**
 	 * Get all news, sort by publication date descending.
+	 *
 	 * @return News list.
 	 */
 	@Override
@@ -39,6 +39,7 @@ public class NewsService implements INewsService {
 
 	/**
 	 * Get a news by it ID.
+	 *
 	 * @return News object.
 	 */
 	@Override
@@ -50,10 +51,23 @@ public class NewsService implements INewsService {
 
 	/**
 	 * Get a news list by it status order by publication date descending.
+	 *
+	 * @param status to filter.
 	 * @return News list.
 	 */
 	@Override
 	public List<News> getNewsByStatus(Status status) {
 		return newsRepository.findByStatusOrderByPublicationDateDesc(status);
+	}
+
+	/**
+	 * Get top 3 news find by status and order by publication date descending.
+	 *
+	 * @param status to filter.
+	 * @return News list.
+	 */
+	@Override
+	public List<News> getTop3NewsByStatus(Status status) {
+		return newsRepository.findTop3ByStatusOrderByPublicationDateDesc(status);
 	}
 }

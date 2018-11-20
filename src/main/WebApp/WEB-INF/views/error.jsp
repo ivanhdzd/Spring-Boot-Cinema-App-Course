@@ -27,6 +27,7 @@
 				<p>Exception: N/A</p>
 			</c:otherwise>
 		</c:choose>
+		<button class="btn btn-info btn-lg" onclick="window.history.back()">Go back</button>
 	</section>
 	<script type="text/javascript" src="${ assets }lib/jquery/js/jquery-slim.min.js"></script>
 	<script type="text/javascript" src="${ assets }lib/popper.js/js/popper.umd.min.js"></script>

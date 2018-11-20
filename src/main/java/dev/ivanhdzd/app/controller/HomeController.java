@@ -45,7 +45,7 @@ class HomeController {
 		model.addAttribute("movies", serviceMovies.getAllMovies());
 		model.addAttribute("searchDate", dateFormat.format(new Date()));
 		model.addAttribute("nextDays", Util.getNextDays(4));
-		model.addAttribute("newsList", serviceNews.getNewsByStatus(Status.ACTIVE));
+		model.addAttribute("newsList", serviceNews.getTop3NewsByStatus(Status.ACTIVE));
 		return "home";
 	}
 
@@ -62,7 +62,7 @@ class HomeController {
 		model.addAttribute("movies", serviceMovies.getAllMovies());
 		model.addAttribute("searchDate", searchDate);
 		model.addAttribute("nextDays", Util.getNextDays(4));
-		model.addAttribute("newsList", serviceNews.getNewsByStatus(Status.ACTIVE));
+		model.addAttribute("newsList", serviceNews.getTop3NewsByStatus(Status.ACTIVE));
 		return "home";
 	}
 }
