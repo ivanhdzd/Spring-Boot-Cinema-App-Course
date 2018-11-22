@@ -10,7 +10,7 @@ CREATE TABLE details (
 	actors VARCHAR(256) DEFAULT NULL,
 	synopsis TEXT,
 	trailer VARCHAR(256) DEFAULT NULL COMMENT 'Youtube trailer URL'
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE movies (
 	id INT(8) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -23,7 +23,7 @@ CREATE TABLE movies (
 	image VARCHAR(128) NOT NULL DEFAULT 'cinema.png',
 	status ENUM('ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE',
 	FOREIGN KEY (id_detail) REFERENCES details(id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE timetables (
 	id INT(8) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -33,7 +33,7 @@ CREATE TABLE timetables (
 	room VARCHAR(64) NOT NULL DEFAULT 'Room 1',
 	price DOUBLE NOT NULL DEFAULT 0,
 	FOREIGN KEY (id_movie) REFERENCES movies(id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE banners (
 	id INT(8) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -41,7 +41,7 @@ CREATE TABLE banners (
 	date DATE NOT NULL,
 	image VARCHAR(128) NOT NULL,
 	status ENUM('ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE'
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE news (
 	id INT(8) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -49,22 +49,34 @@ CREATE TABLE news (
 	publication_date DATE NOT NULL,
 	status ENUM('ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE',
 	details TEXT NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE users (
 	id INT(8) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	active TINYINT(1) NOT NULL DEFAULT 1,
 	username VARCHAR(32) NOT NULL UNIQUE KEY,
-	name VARCHAR(64) NOT NULL,
-	email VARCHAR(64) NOT NULL,
-	password VARCHAR(256) NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+	email VARCHAR(64) NOT NULL UNIQUE KEY,
+	password VARCHAR(256) NOT NULL,
+	name VARCHAR(48) NOT NULL,
+	last_name VARCHAR(64) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
-CREATE TABLE user_profiles (
+CREATE TABLE roles (
 	id INT(8) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	username VARCHAR(32) NOT NULL,
-	profile VARCHAR(256) NOT NULL,
-	FOREIGN KEY (username) REFERENCES users(username)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+	role VARCHAR(48) NOT NULL UNIQUE KEY
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE users_roles (
+	id_user INT(8) NOT NULL,
+	id_role INT(8) NOT NULL,
+	FOREIGN KEY (id_user) REFERENCES users(id),
+	FOREIGN KEY (id_role) REFERENCES roles(id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+INSERT INTO roles VALUES
+	(1, 'ADMINISTRATOR'),
+	(2, 'MANAGER'),
+	(3, 'EDITOR');
 
 INSERT INTO details VALUES
 	(1, 'Jordan Vogt-Roberts', 'Samuel L. Jackson, Tom Hiddleston, Brie Larson, Toby Kebbell', 'Kong: La Isla Calavera reimagina el origen del mítico Kong en una irresistible aventura original del director Jordan Vogt-Roberts. En la película, un diverso equipo de exploradores es reunido para aventurarse en el interior de una isla del Pacífico —tan bella como traicionera— que no aparece en los mapas, sin saber que están invadiendo los dominios del mítico Kong.', 'https://www.youtube.com/embed/86jhW2gPc84'),
@@ -85,36 +97,36 @@ INSERT INTO movies VALUES
 	(7, 7, 'Guardianes de la Galaxia Vol 2', 136, 'B', 'Action', '2018-03-11', 'guardianes-galaxia.png', 'ACTIVE');
 
 INSERT INTO news (id, title, publication_date, details, status) VALUES
-	(1,"La Liga de la Justicia","2017-09-01","El estreno en cines de la película 'La Liga de la Justicia' se presenta como uno de los de mayor interés dentro del género de superhéroes de cómic","ACTIVE"),
-	(2,"Star Wars Episodio 8","2017-09-01","Llega un nuevo cartel de la película 'Star Wars Episodio 8'. Con dos de sus personajes principales. Kylo y Rey, interpretados por Adam Driver y Daisy Ridl","ACTIVE"),
-	(3,"Blade Runner 2","2017-09-01","La actriz Robin Wright es una de las novedades más llamativas dentro del argumento de la secuela de Blade Runner.","ACTIVE"),
-	(4,"Rocky Creed 2","2017-09-01","El proceso de rodaje de la película 'Rocky Creed 2' comenzó hace unos días. Ahora podemos ver el nuevo e impactante aspecto de Sylvester Stallone","INACTIVE"),
-	(5,"Hellboy 3","2017-09-02","Con el rodaje de la película 'Hellboy 3' a punto de dar comienzo, es el momento de ver la primera sinopsis del filme protagonizado por el actor David Harb","INACTIVE"),
-	(6,"Indiana Jones 5","2017-09-02","Hace unos meses se barajaba la posibilidad de que el actor Shia LaBeouf regresara, al menos a modo de cameo, a la saga Indiana Jones en su quinta entrega. ","ACTIVE"),
-	(7,"Aquaman","2017-09-02","El futuro del universo DC se basa en gran medida gracias a títulos como 'Aquaman'. ","ACTIVE"),
-	(8,"Thor 3","2017-09-02","Continúan las novedades de la película de Marvel 'Thor 3 Ragnarok'. Ahora con un cartel de Hulk, personaje de gran relevancia en la tercera entrega ","INACTIVE"),
-	(9,"Los Vengadores 4","2017-09-03","Karen Gillan comparte vistazo de rodaje desde la tercera y cuarta película","ACTIVE"),
-	(10,"Star Wars Han Solo","2017-09-03","Primera imagen de de Paul Bettany en el rodaje","ACTIVE"),
-	(11,"Escuadrón Suicida 2","2017-09-03","Margot Robbie confirma el rodaje para principios de 2018","ACTIVE"),
-	(12,"La Guerra del Planeta de los Simios","2017-09-04","La película de ciencia ficción 'La Guerra del Planeta de los Simios' se sitúa en la carrera hacia los Oscar 2018 de Hollywood.","INACTIVE"),
-	(13,"Maléfica 2","2017-09-04","El proyecto de 'Maléfica 2' cobra nueva vida con la llegada de Jez Butterworth para ocuparse de la nueva versión del guión. ","ACTIVE"),
-	(14,"Top Gun 2","2017-09-04","La película 'Top Gun 2' retrasa su estreno en cines. Todo tras el cambio de guionista dentro de la producción protagonizada por Tom Cruise. ","ACTIVE"),
-	(15,"American Made","2017-09-04","El actor Tom Cruise encabeza los estrenos de cine del fin de semana con la cinta American Made","ACTIVE"),
-	(16,"Ant Man 2","2017-09-04","Llega la primera imagen oficial de la película 'Ant Man 2' con la actriz Evangeline Lilly con el traje de la Avispa en la secuela de Marvel","ACTIVE"),
-	(17,"Secret Service 2","2017-09-05","Llega un nuevo vídeo de la película de acción 'Secret Service 2'. Contando con un buen número de escenas inéditas de la adaptación de la obra de Mark","INACTIVE"),
-	(18,"El Otro Guardaespaldas","2017-09-06","Confirma su éxito en los Estados Unidos repitiendo en lo más alto de la taquilla","ACTIVE"),
-	(19,"Valerian","2017-09-06","Lidera la taquilla de cine en España en su estreno","INACTIVE"),
-	(20,"Madre","2017-09-06","La película 'Madre', dirigida por el cineasta Darren Aronofsky y protagonizada por Jennifer Lawrence y Javier Bardem, llega ahora con su cartel final","ACTIVE"),
-	(21,"Tony Gilroy dirigirá Matusalén","2017-09-07","Warner Bros. Pictures ha iniciado las negociaciones con Tony Gilroy (High Wire Act) para que escriba y dirija un thriller conocido hasta el momento como Methuselah.","ACTIVE"),
-	(22,"Guionista para Maléfica 2","2017-09-07","Disney Pictures ha contratado a Jez Butterworth ( I Feel Good) para que re-escriba el guión de la secuela de Maléfica.","ACTIVE"),
-	(23,"Jon Bernthal se une a First Man","2017-09-07","Jon Bernthal (Baby Driver) se pondrá a las órdenes de Damien Chazelle en la película de Universal Pictures y Amblin Entertainment First Man.","INACTIVE"),
-	(24,"Barry Seal: El traficante","2017-09-07","El proximo mes se estrena la pelicula Barry Seal: El traficante. Nuevamente veremos a Tom Cruise.","ACTIVE"),
-	(25,"Ben Affleck podría dirigir Red Platoon","2017-09-08","Ben Affleck (Liga de la justicia) ha iniciado las conversaciones con Sony Pictures, Immersive Pictures y Smokehouse Pictures para dirigir el drama bélico Red Platoon.","ACTIVE"),
-	(26,"Disney prepara una película sobre Obi-Wan Kenobi","2017-09-08","Disney y Lucasfilm está preparando un nuevo spin-off de Star Wars, esa vez centrado en el personaje de Obi-Wan Kenobi.","INACTIVE"),
-	(27,"Primer vistazo a Cable y Domino en Deadpool 2","2017-09-08","Se han publicado en las redes sociales las primeras fotografías de Zazie Beetz en el papel de Neena Thurman / Domino y Josh Brolin como Cable en la esperada Deadpool 2.","ACTIVE"),
-	(28,"Pedro Pascal se une a The Equalizer 2","2017-09-08","Pedro Pascal (La Gran Muralla) participará en la secuela de la película de Sony Pictures The Equalizer: El Protector.","ACTIVE"),
-	(29,"Más reparto para Skyscraper","2017-09-08","Chin Han (Ghost In the Shell) acompañará a Dwayne Johnson en el thriller de acción de Legendary Skyscraper.","INACTIVE"),
-	(30,"Fecha para Wonder Woman 2","2017-09-08","Warner Bros. Pictures ha puesto fecha de estreno a la secuela de Wonder Woman, que volverá a estar protagonizada por Gal Gadot en el papel de la famosa heroína.","ACTIVE");
+	(1, 'La Liga de la Justicia', '2017-09-01', 'El estreno en cines de la película \"La Liga de la Justicia\" se presenta como uno de los de mayor interés dentro del género de superhéroes de cómic', 'ACTIVE'),
+	(2, 'Star Wars Episodio 8', '2017-09-01', 'Llega un nuevo cartel de la película \"Star Wars Episodio 8\". Con dos de sus personajes principales. Kylo y Rey, interpretados por Adam Driver y Daisy Ridl', 'ACTIVE'),
+	(3, 'Blade Runner 2', '2017-09-01', 'La actriz Robin Wright es una de las novedades más llamativas dentro del argumento de la secuela de Blade Runner.', 'ACTIVE'),
+	(4, 'Rocky Creed 2', '2017-09-01', 'El proceso de rodaje de la película \"Rocky Creed 2\" comenzó hace unos días. Ahora podemos ver el nuevo e impactante aspecto de Sylvester Stallone', 'INACTIVE'),
+	(5, 'Hellboy 3', '2017-09-02', 'Con el rodaje de la película \"Hellboy 3\" a punto de dar comienzo, es el momento de ver la primera sinopsis del filme protagonizado por el actor David Harb', 'INACTIVE'),
+	(6, 'Indiana Jones 5', '2017-09-02', 'Hace unos meses se barajaba la posibilidad de que el actor Shia LaBeouf regresara, al menos a modo de cameo, a la saga Indiana Jones en su quinta entrega. ', 'ACTIVE'),
+	(7, 'Aquaman', '2017-09-02', 'El futuro del universo DC se basa en gran medida gracias a títulos como \"Aquaman\". ', 'ACTIVE'),
+	(8, 'Thor 3', '2017-09-02', 'Continúan las novedades de la película de Marvel \"Thor 3 Ragnarok\". Ahora con un cartel de Hulk, personaje de gran relevancia en la tercera entrega ', 'INACTIVE'),
+	(9, 'Los Vengadores 4', '2017-09-03', 'Karen Gillan comparte vistazo de rodaje desde la tercera y cuarta película', 'ACTIVE'),
+	(10, 'Star Wars Han Solo', '2017-09-03', 'Primera imagen de de Paul Bettany en el rodaje', 'ACTIVE'),
+	(11, 'Escuadrón Suicida 2', '2017-09-03', 'Margot Robbie confirma el rodaje para principios de 2018', 'ACTIVE'),
+	(12, 'La Guerra del Planeta de los Simios', '2017-09-04', 'La película de ciencia ficción \"La Guerra del Planeta de los Simios\" se sitúa en la carrera hacia los Oscar 2018 de Hollywood.', 'INACTIVE'),
+	(13, 'Maléfica 2', '2017-09-04', 'El proyecto de \"Maléfica 2\" cobra nueva vida con la llegada de Jez Butterworth para ocuparse de la nueva versión del guión. ', 'ACTIVE'),
+	(14, 'Top Gun 2', '2017-09-04', 'La película \"Top Gun 2\" retrasa su estreno en cines. Todo tras el cambio de guionista dentro de la producción protagonizada por Tom Cruise. ', 'ACTIVE'),
+	(15, 'American Made', '2017-09-04', 'El actor Tom Cruise encabeza los estrenos de cine del fin de semana con la cinta American Made', 'ACTIVE'),
+	(16, 'Ant Man 2', '2017-09-04', 'Llega la primera imagen oficial de la película \"Ant Man 2\" con la actriz Evangeline Lilly con el traje de la Avispa en la secuela de Marvel', 'ACTIVE'),
+	(17, 'Secret Service 2', '2017-09-05', 'Llega un nuevo vídeo de la película de acción \"Secret Service 2\". Contando con un buen número de escenas inéditas de la adaptación de la obra de Mark', 'INACTIVE'),
+	(18, 'El Otro Guardaespaldas', '2017-09-06', 'Confirma su éxito en los Estados Unidos repitiendo en lo más alto de la taquilla', 'ACTIVE'),
+	(19, 'Valerian', '2017-09-06', 'Lidera la taquilla de cine en España en su estreno', 'INACTIVE'),
+	(20, 'Madre', '2017-09-06', 'La película \"Madre\", dirigida por el cineasta Darren Aronofsky y protagonizada por Jennifer Lawrence y Javier Bardem, llega ahora con su cartel final', 'ACTIVE'),
+	(21, 'Tony Gilroy dirigirá Matusalén', '2017-09-07', 'Warner Bros. Pictures ha iniciado las negociaciones con Tony Gilroy (High Wire Act) para que escriba y dirija un thriller conocido hasta el momento como Methuselah.', 'ACTIVE'),
+	(22, 'Guionista para Maléfica 2', '2017-09-07', 'Disney Pictures ha contratado a Jez Butterworth ( I Feel Good) para que re-escriba el guión de la secuela de Maléfica.', 'ACTIVE'),
+	(23, 'Jon Bernthal se une a First Man', '2017-09-07', 'Jon Bernthal (Baby Driver) se pondrá a las órdenes de Damien Chazelle en la película de Universal Pictures y Amblin Entertainment First Man.', 'INACTIVE'),
+	(24, 'Barry Seal: El traficante', '2017-09-07', 'El proximo mes se estrena la pelicula Barry Seal: El traficante. Nuevamente veremos a Tom Cruise.', 'ACTIVE'),
+	(25, 'Ben Affleck podría dirigir Red Platoon', '2017-09-08', 'Ben Affleck (Liga de la justicia) ha iniciado las conversaciones con Sony Pictures, Immersive Pictures y Smokehouse Pictures para dirigir el drama bélico Red Platoon.', 'ACTIVE'),
+	(26, 'Disney prepara una película sobre Obi-Wan Kenobi', '2017-09-08', 'Disney y Lucasfilm está preparando un nuevo spin-off de Star Wars, esa vez centrado en el personaje de Obi-Wan Kenobi.', 'INACTIVE'),
+	(27, 'Primer vistazo a Cable y Domino en Deadpool 2', '2017-09-08', 'Se han publicado en las redes sociales las primeras fotografías de Zazie Beetz en el papel de Neena Thurman / Domino y Josh Brolin como Cable en la esperada Deadpool 2.', 'ACTIVE'),
+	(28, 'Pedro Pascal se une a The Equalizer 2', '2017-09-08', 'Pedro Pascal (La Gran Muralla) participará en la secuela de la película de Sony Pictures The Equalizer: El Protector.', 'ACTIVE'),
+	(29, 'Más reparto para Skyscraper', '2017-09-08', 'Chin Han (Ghost In the Shell) acompañará a Dwayne Johnson en el thriller de acción de Legendary Skyscraper.', 'INACTIVE'),
+	(30, 'Fecha para Wonder Woman 2', '2017-09-08', 'Warner Bros. Pictures ha puesto fecha de estreno a la secuela de Wonder Woman, que volverá a estar protagonizada por Gal Gadot en el papel de la famosa heroína.', 'ACTIVE');
 
 INSERT INTO timetables (id_movie, date, time, room, price) VALUES
 	(1, NOW(), '17:30', 'Room Premium', 50),

@@ -68,11 +68,10 @@ class MoviesController {
 	 * Get new movie form view.
 	 *
 	 * @param movie binding object.
-	 * @param model object to pass data to JSP template.
 	 * @return JSP template name to render.
 	 */
 	@GetMapping(value = "/create")
-	public String createMovie(@ModelAttribute Movie movie, Model model) {
+	public String createMovie(@ModelAttribute Movie movie) {
 		return "movies/formMovie";
 	}
 

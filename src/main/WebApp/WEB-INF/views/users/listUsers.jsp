@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<spring:url value="" var="urlRoot" />
 <spring:url value="/" var="assets" />
+<spring:url value="../" var="urlRoot" />
+<spring:url value="/users" var="urlUsers" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Cinema App</title>
+	<title>Sign-up</title>
 	<meta charset="ISO-8859-1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,19 +18,7 @@
 <body>
 	<jsp:include page="${ urlRoot }includes/navbar.jsp" />
 	<section id="container" class="container">
-		<h1 class="alert alert-danger">Error</h1>
-		<C:if test="${ statusCode != null }">
-			<h2>Code: ${ statusCode }</h2>
-		</C:if>
-		<c:choose>
-			<c:when test="${ exception != null }">
-				<p>Exception: ${ exception }</p>
-			</c:when>
-			<c:otherwise>
-				<p>Exception: N/A</p>
-			</c:otherwise>
-		</c:choose>
-		<button class="btn btn-info btn-lg" onclick="window.history.back()">Go back</button>
+		<h1>Here goes users table list</h1>
 	</section>
 	<jsp:include page="${ urlRoot }includes/footer.jsp" />
 	<script type="text/javascript" src="${ assets }lib/jquery/js/jquery-slim.min.js"></script>

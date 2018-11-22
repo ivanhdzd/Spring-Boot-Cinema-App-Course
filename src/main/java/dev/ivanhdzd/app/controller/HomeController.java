@@ -38,7 +38,7 @@ class HomeController {
 	 * @param model object to pass data to JSP template.
 	 * @return JSP template name to render.
 	 */
-	@GetMapping(value = "")
+	@GetMapping(value = { "/", "/home" })
 	public String getHome(Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try {

@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <spring:url value="" var="urlRoot" />
 <spring:url value="/" var="assets" />
+<spring:url value="/search" var="urlSearch" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +59,7 @@
 		</article>
 		<h1 class="text-center mt-3">Movies</h1>
 		<article class="row mb-3">
-			<form action="${ urlRoot }search" method="post" class="form-inline">
+			<form action="${ urlSearch }" method="post" class="form-inline">
 				<div class="form-group">
 					<label for="search-date" class="mr-2">Date:</label>
 					<select id="search-date" name="searchDate" class="form-control mr-2">

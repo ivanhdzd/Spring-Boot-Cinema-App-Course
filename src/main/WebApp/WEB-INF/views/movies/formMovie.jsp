@@ -33,7 +33,7 @@
 			<form:hidden path="id"/>
 			<form:hidden path="detail.id"/>
 			<article class="card-header">
-				<h1 class="card-title text-center">New movie</h1>
+				<h1 class="card-title text-center">Movie form</h1>
 			</article>
 			<article class="card-body">
 				<div class="form-row">

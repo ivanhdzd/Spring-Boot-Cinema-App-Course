@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <spring:url value="/" var="assets" />
 <spring:url value="" var="urlRoot" />
+<spring:url value="/contact" var="urlContact" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 		<c:if test="${ message != null }">
 			<div class="alert alert-success" role="alert">${ message }</div>
 		</c:if>
-		<form:form action="${ urlRoot }contact" class="card bg-light" modelAttribute="contact" method="post">
+		<form:form action="${ urlContact }" class="card bg-light" modelAttribute="contact" method="post">
 			<article class="card-header">
 				<h1 class="card-title text-center">Contact</h1>
 			</article>
