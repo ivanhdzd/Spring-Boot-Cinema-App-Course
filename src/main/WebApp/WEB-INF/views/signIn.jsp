@@ -20,7 +20,7 @@
 	<section id="container" class="container">
 		<article class="row">
 			<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-				<form class="card bg-light" role="form" action="${ urlSignIn }" method="POST">
+				<form class="card bg-light" role="form" action="${ urlSignIn }" method="POST" accept-charset="UTF-8">
 					<div class="card-header">
 						<h1 class="card-title text-center">Sign-in</h1>
 					</div>
@@ -38,7 +38,7 @@
 						<button type="submit" id="submit" name="submit" class="btn btn-dark btn-lg">Sign-in</button>
 						<button type="reset" id="reset" name="reset" class="btn btn-danger btn-lg">Cancel</button>
 					</div>
-					<input type="hidden"name="${ _csrf.parameterName }" value="${ _csrf.token }">
+					<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
 				</form>
 				<c:if test="${ param.error != null }">
 					<div class="alert alert-danger text-center mt-3" role="alert">Access denied!</div>

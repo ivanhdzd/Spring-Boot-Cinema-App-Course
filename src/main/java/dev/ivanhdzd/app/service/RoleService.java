@@ -25,6 +25,16 @@ public class RoleService implements IRoleService {
 	}
 
 	/**
+	 * Get all roles without ADMINISTRATOR role.
+	 *
+	 * @return roles list.
+	 */
+	@Override
+	public List<Role> getAllRolesWithoutAdmin() {
+		return roleRepository.findByRoleNot("ADMINISTRATOR");
+	}
+
+	/**
 	 * Get role by it value.
 	 *
 	 * @param role value.

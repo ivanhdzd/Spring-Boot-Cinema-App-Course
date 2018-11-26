@@ -22,7 +22,7 @@
 		<c:if test="${ message != null }">
 			<div class="alert alert-success" role="alert">${ message }</div>
 		</c:if>
-		<form:form action="${ urlNews }/save" method="post" modelAttribute="news" class="card bg-light">
+		<form:form action="${ urlNews }/save" method="post" modelAttribute="news" class="card bg-light" accept-charset="UTF-8">
 			<article class="card-header">
 				<h1 class="card-title text-center">New news</h1>
 			</article>

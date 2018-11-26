@@ -29,7 +29,7 @@
 				</ul>
 			</div>
 		</spring:hasBindErrors>
-		<form:form action="${ urlMovies }/save" method="post" enctype="multipart/form-data" modelAttribute="movie" class="card bg-light">
+		<form:form action="${ urlMovies }/save" method="post" enctype="multipart/form-data" modelAttribute="movie" class="card bg-light" accept-charset="UTF-8">
 			<form:hidden path="id"/>
 			<form:hidden path="detail.id"/>
 			<article class="card-header">

@@ -59,7 +59,7 @@
 		</article>
 		<h1 class="text-center mt-3">Movies</h1>
 		<article class="row mb-3">
-			<form action="${ urlSearch }" method="post" class="form-inline">
+			<form action="${ urlSearch }" method="post" class="form-inline" accept-charset="UTF-8">
 				<div class="form-group">
 					<label for="search-date" class="mr-2">Date:</label>
 					<select id="search-date" name="searchDate" class="form-control mr-2">

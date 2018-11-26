@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Sign-up</title>
+	<title>Users</title>
 	<meta charset="ISO-8859-1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,58 @@
 <body>
 	<jsp:include page="${ urlRoot }includes/navbar.jsp" />
 	<section id="container" class="container">
-		<h1>Here goes users table list</h1>
+		<h1>Users list</h1>
+		<c:if test="${ message != null }">
+			<div class="alert alert-success" role="alert">${ message }</div>
+		</c:if>
+		<article class="my-2 my-md-4">
+			<a class="btn btn-success btn-lg" href="${ urlUsers }/create">New user</a>
+		</article>
+		<article class="card card-body" style="padding: 0">
+			<div class="table-responsive height-3-over-4">
+				<table class="table table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Username</th>
+							<th scope="col">Email</th>
+							<th scope="col">Name</th>
+							<th scope="col">Last name</th>
+							<th scope="col">Status</th>
+							<th scope="col">Role</th>
+							<th scope="col">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${ users }" var="user">
+							<tr>
+								<td>${ user.username }</td>
+								<td>${ user.email }</td>
+								<td>${ user.name }</td>
+								<td>${ user.lastName }</td>
+								<td>
+									<c:choose>
+										<c:when test="${ user.active == 1 }">
+											<label class="label label-success">Active</label>
+										</c:when>
+										<c:otherwise>
+											<label class="label label-danger">Inactive</label>
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td>
+									<c:forEach items="${ user.roles }" var="role">
+										${ role.role }&nbsp;
+									</c:forEach>
+								</td>
+								<td>
+									<a class="btn btn-success" href="${ urlUsers }/edit/${ user.id }">Edit</a>
+									<a class="btn btn-danger" href="${ urlUsers }/delete/${ user.id }" onclick="return confirm('Do you sure to want to delete this user?')">Delete</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 	</section>
 	<jsp:include page="${ urlRoot }includes/footer.jsp" />
 	<script type="text/javascript" src="${ assets }lib/jquery/js/jquery-slim.min.js"></script>

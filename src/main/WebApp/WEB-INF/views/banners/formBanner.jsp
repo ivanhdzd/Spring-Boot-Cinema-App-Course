@@ -29,7 +29,7 @@
 				</ul>
 			</div>
 		</spring:hasBindErrors>
-		<form:form action="${ urlBanners }/save" method="post" enctype="multipart/form-data" modelAttribute="banner" class="card bg-light">
+		<form:form action="${ urlBanners }/save" method="post" enctype="multipart/form-data" modelAttribute="banner" class="card bg-light" accept-charset="UTF-8">
 			<article class="card-header">
 				<h1 class="card-title text-center">New banner</h1>
 			</article>

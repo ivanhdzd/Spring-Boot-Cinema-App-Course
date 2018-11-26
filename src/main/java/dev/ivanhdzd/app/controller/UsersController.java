@@ -32,6 +32,7 @@ public class UsersController {
 	 */
 	@GetMapping(value = "")
 	public String getUsersList(Model model) {
+		model.addAttribute("users", userService.getAllUsersWithoutAdmin());
 		return "users/listUsers";
 	}
 
@@ -44,7 +45,8 @@ public class UsersController {
 	 */
 	@GetMapping(value = "/create")
 	public String createUser(@ModelAttribute User user, Model model) {
-		model.addAttribute("rolesList", roleService.getAllRoles());
+		model.addAttribute("rolesList", roleService.getAllRolesWithoutAdmin());
+		model.addAttribute("formActionPostUrl", "/users/save");
 		return "users/formUser";
 	}
 
@@ -57,19 +59,26 @@ public class UsersController {
 	 */
 	@GetMapping(value = "/edit/{id}")
 	public String editUser(@PathVariable("id") int id, Model model) {
-		model.addAttribute("rolesList", roleService.getAllRoles());
+		User user = userService.findUserById(id);
+		if (user == null)
+			return "redirect:/users";
+
+		user.setPassword(null);
+		model.addAttribute("user", user);
+		model.addAttribute("rolesList", roleService.getAllRolesWithoutAdmin());
+		model.addAttribute("formActionPostUrl", "/users/save");
 		return "users/formUser";
 	}
 
 	/**
 	 * Delete an user and redirect to users list view.
 	 *
-	 * @param id    user get from path variable.
-	 * @param model object to pass data to JSP template.
+	 * @param id user get from path variable.
 	 * @return JSP template name to render.
 	 */
 	@GetMapping(value = "/delete/{id}")
-	public String deleteUser(@PathVariable("id") int id, Model model) {
+	public String deleteUser(@PathVariable("id") int id) {
+		userService.delete(id);
 		return "redirect:/users";
 	}
 

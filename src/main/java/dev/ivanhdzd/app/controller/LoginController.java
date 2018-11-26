@@ -49,7 +49,9 @@ public class LoginController {
 		Role adminRole = roleService.getRole("ADMINISTRATOR");
 		user.setRoles(new HashSet<Role>(Arrays.asList(adminRole)));
 		model.addAttribute("user", user);
-		return "signUp";
+		model.addAttribute("isAdmin", true);
+		model.addAttribute("formActionPostUrl", "/sign-up");
+		return "users/formUser";
 	}
 
 	/**
@@ -62,6 +64,10 @@ public class LoginController {
 	public String postSignUp(@ModelAttribute User user) {
 		if (userService.thereAreUsersRegisterd())
 			return "redirect:/sign-in";
+		Role adminRole = roleService.getRole("ADMINISTRATOR");
+		user.setRoles(new HashSet<Role>(Arrays.asList(adminRole)));
+		user.setActive(1);
+		System.out.println("\n" + user + "\n");
 		userService.saveUser(user);
 		return "redirect:/sign-in";
 	}
