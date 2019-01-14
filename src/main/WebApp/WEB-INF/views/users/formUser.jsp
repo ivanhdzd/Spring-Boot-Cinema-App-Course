@@ -14,15 +14,12 @@
 	<link rel="stylesheet" href="${ assets }lib/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${ assets }css/container.css">
 </head>
-<body>
-	<c:if test="${ user.id == 0 }">
-		<script type="text/javascript" src="${ assets }js/forms/show-hide-password.js"></script>
-	</c:if>
+<body onload="addShowHidePassword('password', 'show-password-toggle')">
 	<jsp:include page="${ urlRoot }includes/navbar.jsp" />
 	<section id="container" class="container">
 		<article class="row">
 			<div class="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
-				<form:form class="card bg-light" role="form" action="${ formActionPostUrl }" method="POST" modelAttribute="user" accept-charset="UTF-8">
+				<form:form class="card bg-light" role="form" action="${ formUserUrl }/save" method="POST" modelAttribute="user" accept-charset="UTF-8">
 					<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
 					<form:hidden id="id" path="id" />
 					<c:if test="${ user.id != 0 }">
@@ -64,8 +61,7 @@
 							<div class="form-group">
 								<label for="password">Password:</label>
 								<div class="input-group">
-									<form:input type="password" id="password" name="password" path="password" class="form-control"
-										onload="addShowHidePassword('password', 'show-password-toggle')" />
+									<form:input type="password" id="password" name="password" path="password" class="form-control" />
 									<div class="input-group-append">
 										<div id="show-password-toggle" class="input-group-text" style="cursor: pointer">Show</div>
 									</div>
@@ -74,7 +70,7 @@
 						</c:if>
 						<div class="form-row">
 							<c:choose>
-								<c:when test="${ isAdmin == true }">
+								<c:when test="${ rolesList == null }">
 									<div class="col-12 col-sm-6 pr-sm-3">
 										<label for="active">Status:</label>
 										<input type="text" value="Active" class="form-control" disabled>
@@ -113,6 +109,11 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
+						<c:if test="${ showChangePassword == true }">
+							<div class="text-center">
+								<a href="${ formUserUrl }/change-password">Change your password here.</a>
+							</div>
+						</c:if>
 					</div>
 					<div class="card-footer d-flex justify-content-around">
 						<button type="submit" id="submit" name="submit" class="btn btn-dark btn-lg">Save</button>
@@ -129,5 +130,6 @@
 	<script type="text/javascript" src="${ assets }lib/jquery/js/jquery-slim.min.js"></script>
 	<script type="text/javascript" src="${ assets }lib/popper.js/js/popper.umd.min.js"></script>
 	<script type="text/javascript" src="${ assets }lib/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${ assets }js/forms/show-hide-password.js"></script>
 </body>
 </html>

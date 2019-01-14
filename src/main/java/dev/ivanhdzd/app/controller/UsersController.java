@@ -46,7 +46,7 @@ public class UsersController {
 	@GetMapping(value = "/create")
 	public String createUser(@ModelAttribute User user, Model model) {
 		model.addAttribute("rolesList", roleService.getAllRolesWithoutAdmin());
-		model.addAttribute("formActionPostUrl", "/users/save");
+		model.addAttribute("formUserUrl", "/users");
 		return "users/formUser";
 	}
 
@@ -66,7 +66,7 @@ public class UsersController {
 		user.setPassword(null);
 		model.addAttribute("user", user);
 		model.addAttribute("rolesList", roleService.getAllRolesWithoutAdmin());
-		model.addAttribute("formActionPostUrl", "/users/save");
+		model.addAttribute("formUserUrl", "/users");
 		return "users/formUser";
 	}
 

@@ -49,7 +49,6 @@ public class LoginController {
 		Role adminRole = roleService.getRole("ADMINISTRATOR");
 		user.setRoles(new HashSet<Role>(Arrays.asList(adminRole)));
 		model.addAttribute("user", user);
-		model.addAttribute("isAdmin", true);
 		model.addAttribute("formActionPostUrl", "/sign-up");
 		return "users/formUser";
 	}

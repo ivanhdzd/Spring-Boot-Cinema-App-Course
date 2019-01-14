@@ -11,6 +11,9 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbar-content">
 			<ul class="navbar-nav my-2 my-lg-0">
+				<sec:authorize access="isAuthenticated()">
+					<li class="nav-item"><a class="nav-link" href="/profile" onclick="closeDropdown()">Profile</a></li>
+				</sec:authorize>
 				<sec:authorize access="hasAuthority('ADMINISTRATOR')">
 					<li class="nav-item"><a class="nav-link" href="/users" onclick="closeDropdown()">Users</a></li>
 				</sec:authorize>
